@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00.000 --> 00:06.000
+Microsoft 365 Profile Cards — synthetic data demonstration.
+
+00:06.000 --> 00:12.000
+Compact cards show Available, In a meeting and Offline presence.
+
+00:12.000 --> 00:20.000
+Select View profile to see Teams status and extended contact details.
+
+00:20.000 --> 00:26.000
+A second profile demonstrates the In a meeting state.
+
+00:26.000 --> 00:32.000
+Deploy the SPFx package, approve Graph permissions and configure PnP Search Results.
