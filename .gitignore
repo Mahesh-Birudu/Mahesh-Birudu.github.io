@@ -1,0 +1,12 @@
+# Keep private credentials and local runtime data out of the portfolio
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+credentials.json
+node_modules/
+*.log
+.DS_Store
