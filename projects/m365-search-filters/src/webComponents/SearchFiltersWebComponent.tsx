@@ -6,6 +6,7 @@ import { FilterSection } from '../components/FilterSection';
 import { FilterGroup,FilterValue,FilterPanelProps } from '../components/types';
 import { brandStyle } from '@mahesh/m365-search-brand';
 import { filterStyles } from '../components/filterStyles';
+import {clearFilterFields} from '../components/clearFilters';
 import {filterViewState} from '../components/viewState';
 interface Attributes extends Partial<FilterPanelProps> {instanceId?:string;filter?:FilterGroup;}
 /** React owns markup; only documented PnP filter events cross the host boundary. */
@@ -25,7 +26,7 @@ export class SearchFiltersWebComponent extends BaseWebComponent {
     ReactDOM.render(<FilterPanel filters={Array.isArray(a.filters)?a.filters:[]} themeVariant={a.themeVariant} viewState={filterViewState(a.instanceId)}
       onChange={(f,v,s)=>this.change(a.instanceId,f,v,s)}
       onApply={()=>this.emit(ExtensibilityConstants.EVENT_FILTER_APPLY_ALL,{instanceId:a.instanceId})}
-      onClear={filterName=>this.emit(ExtensibilityConstants.EVENT_FILTER_CLEAR_ALL,{instanceId:a.instanceId,filterName})}/>,this);
+      onClear={filterName=>clearFilterFields(this.parentElement||this,ExtensibilityConstants.EVENT_FILTER_CLEAR_ALL,a.instanceId!,a.filters||[],filterName)}/>,this);
   }
 }
 /** Reusable option control when authors prefer PnP's builtin layouts. */

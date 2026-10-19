@@ -1,1 +1,32 @@
-{"$schema":"https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json","solution":{"name":"m365-search-filters-client-side-solution","id":"e94b2619-5b52-47a4-a2d6-d8d01c9ac7a1","version":"1.0.0.0","includeClientSideAssets":true,"skipFeatureDeployment":true,"isDomainIsolated":false,"developer":{"name":"Mahesh Babu Birudu","websiteUrl":"","privacyUrl":"","termsOfUseUrl":"","mpnId":"Undefined-1.0.0"},"metadata":{"shortDescription":{"default":"Branded PnP Search Filters"},"longDescription":{"default":"Accessible React filters with a shared M365 search brand, responsive drawer and PnP filter events."},"screenshotPaths":[],"videoUrl":"","categories":[]}},"paths":{"zippedPackage":"solution/m365-search-filters.sppkg"}}
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "m365-search-filters-client-side-solution",
+    "id": "e94b2619-5b52-47a4-a2d6-d8d01c9ac7a1",
+    "version": "1.0.1.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Mahesh Babu Birudu",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.0.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Branded PnP Search Filters"
+      },
+      "longDescription": {
+        "default": "Accessible React filters with a shared M365 search brand, responsive drawer and PnP filter events."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    }
+  },
+  "paths": {
+    "zippedPackage": "solution/m365-search-filters.sppkg"
+  }
+}

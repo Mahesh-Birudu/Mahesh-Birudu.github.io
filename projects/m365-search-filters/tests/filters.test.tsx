@@ -47,3 +47,6 @@ test('PnP element replacement preserves drawer, option search and checkbox focus
   }finally{v.cleanup();}
 });
 
+
+import {clearFilterFields} from '../src/components/clearFilters';
+test('clear all dispatches a named PnP clear for every field using a stable target',()=>{const dom=new JSDOM('<!doctype html><body></body>');Object.defineProperty(globalThis,'CustomEvent',{value:dom.window.CustomEvent,writable:true,configurable:true});const target=dom.window.document.body;const names:string[]=[];target.addEventListener('clear',event=>names.push((event as CustomEvent).detail.filterName));clearFilterFields(target,'clear','webpart',[group,{...group,filterName:'Company'}]);assert.deepEqual(names,['Department','Company']);names.length=0;clearFilterFields(target,'clear','webpart',[group],'Department');assert.deepEqual(names,['Department']);dom.window.close();});
