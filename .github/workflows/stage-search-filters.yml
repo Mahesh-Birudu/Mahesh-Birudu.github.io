@@ -1,4 +1,4 @@
-name: Validate and publish branded search filters
+name: Publish validated branded search source
 on:
   push:
     paths: ['.github/workflows/stage-search-filters.yml']
@@ -6,17 +6,11 @@ on:
 permissions:
   contents: write
 jobs:
-  verify:
+  publish:
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        project: [m365-profile-cards, m365-search-filters]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
-        with:
-          node-version: 22.23.3
-      - &restore-source
+      -
         name: Restore reviewed project source
         run: |
           python3 - <<'PY'
@@ -4406,32 +4400,10 @@ jobs:
               p.parent.mkdir(parents=True,exist_ok=True)
               p.write_text(content,encoding='utf-8')
           PY
-      - name: Check and package project
-        working-directory: projects/${{ matrix.project }}
-        run: |
-          npm ci --no-audit --no-fund
-          npm run typecheck
-          npm test
-          npm run build
-          npm run package
-          npm run preview:build
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: branded-search-${{ matrix.project }}
-          path: |
-            projects/${{ matrix.project }}/sharepoint/solution/*.sppkg
-            projects/${{ matrix.project }}/preview/dist/
-  publish:
-    needs: verify
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - *restore-source
-      - name: Publish validated source and remove completed staging workflow
+      - name: Publish previously validated project source
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm .github/workflows/stage-search-filters.yml
-          git add projects/m365-profile-cards projects/m365-search-filters projects/m365-search-brand README.md .github/workflows/spfx.yml .github/workflows/stage-search-filters.yml
+          git add projects/m365-profile-cards projects/m365-search-filters projects/m365-search-brand README.md
           git commit -m "Add branded React search filters and shared search theme"
           git push

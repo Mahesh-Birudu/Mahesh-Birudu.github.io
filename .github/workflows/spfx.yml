@@ -2,18 +2,21 @@ name: SPFx Heft checks
 on:
   push:
     branches: [main]
-    paths: ['projects/m365-profile-cards/**']
+    paths: ['projects/**', '.github/workflows/spfx.yml']
   pull_request:
-    paths: ['projects/m365-profile-cards/**']
+    paths: ['projects/**', '.github/workflows/spfx.yml']
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        project: [m365-profile-cards, m365-search-filters]
     defaults:
       run:
-        working-directory: projects/m365-profile-cards
+        working-directory: projects/${{ matrix.project }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
