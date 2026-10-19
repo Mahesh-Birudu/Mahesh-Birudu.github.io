@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "m365-profile-cards-client-side-solution",
+    "id": "a1fca27b-298d-40e5-b15d-a86d6a3944db",
+    "version": "1.2.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Mahesh Babu Birudu",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.0.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "PnP Search people cards"
+      },
+      "longDescription": {
+        "default": "Tenant-independent Microsoft 365 profile cards and accessible profile dialog for PnP Modern Search."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.Read.All"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "ProfilePhoto.Read.All"
+      },
+      {
+        "scope": "Presence.Read.All",
+        "resource": "Microsoft Graph"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/m365-profile-cards.sppkg"
+  }
+}
