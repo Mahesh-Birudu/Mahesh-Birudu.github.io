@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-library-manifest.schema.json",
+  "id": "e425e0ca-e11c-45c6-80b2-94c5e6b035ae",
+  "alias": "ProfileCardsLibrary",
+  "componentType": "Library",
+  "version": "*",
+  "manifestVersion": 2
+}
