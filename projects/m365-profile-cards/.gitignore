@@ -7,3 +7,9 @@ dist/
 *.log
 .heft/
 sharepoint/solution/*.sppkg
+
+sharepoint/solution/debug/
+
+lib-dts/
+
+lib-esm/
