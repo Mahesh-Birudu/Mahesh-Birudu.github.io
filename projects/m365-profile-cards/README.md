@@ -1,6 +1,6 @@
 # Microsoft 365 Profile Cards — React + PnPjs
 
-Version 1.3.0. A registered PnP Modern Search custom element mounts React components. Microsoft Graph requests use PnPjs with the signed-in SPFx service scope; no tenant URL, credentials or app secret is embedded.
+Version 1.3.1. A registered PnP Modern Search custom element mounts React components. Microsoft Graph requests use PnPjs with the signed-in SPFx service scope; no tenant URL, credentials or app secret is embedded.
 
 ```text
 src/
@@ -48,9 +48,9 @@ npm run build
 npm run package
 ```
 
-Package: `sharepoint/solution/m365-profile-cards.sppkg` (solution version 1.3.0.0). See [setup](docs/SETUP.md), [presence](docs/TEAMS-PRESENCE.md), [architecture](docs/ARCHITECTURE.md) and [validation](VALIDATION.md).
+Package: `sharepoint/solution/m365-profile-cards.sppkg` (solution version 1.3.1.0). See [setup](docs/SETUP.md), [presence](docs/TEAMS-PRESENCE.md), [architecture](docs/ARCHITECTURE.md) and [validation](VALIDATION.md).
 
-The public browser demo uses these same React components with `MockProfileProvider`; it never authenticates against Microsoft 365. Its profiles and Teams states are synthetic. The video records the previous visual version; use the interactive React demo to review 1.3.0.
+The public browser demo uses these same React components with `MockProfileProvider`; it never authenticates against Microsoft 365. Its profiles and Teams states are synthetic. The video records the previous visual version; use the interactive React demo to review 1.3.1.
 
 ## Upgrade
 
@@ -58,7 +58,7 @@ Replace the package in the app catalog, update the installed site app if request
 
 ## Downloads and demo
 
-- [SPFx package 1.3.0.0](../../portfolio/projects/m365-profile-cards/downloads/m365-profile-cards.sppkg)
+- [SPFx package 1.3.1.0](../../portfolio/projects/m365-profile-cards/downloads/m365-profile-cards.sppkg)
 - [Buildable source snapshot](../../portfolio/projects/m365-profile-cards/downloads/source.zip)
 - [Captioned visual walkthrough — 1.1.0](../../portfolio/projects/m365-profile-cards/media/demo.mp4)
 - Compiled demo is in [the portfolio showcase](../../portfolio/projects/m365-profile-cards/); editable React preview source is in [preview](preview/); run the preview commands above for the interactive version.
@@ -80,6 +80,6 @@ npm run build
 npm run package
 ```
 
-Upgrade the installed PnP Modern Search package to 4.25.0 before deploying this 1.3.0 library into a tenant previously using 4.16.0. GUIDs and Graph scopes remain unchanged. This repository publication does not deploy into SharePoint.
+Upgrade the installed PnP Modern Search package to 4.25.0 before deploying this 1.3.1 library into a tenant previously using 4.16.0. GUIDs and Graph scopes remain unchanged. This repository publication does not deploy into SharePoint.
 
 Sources: [Microsoft SPFx compatibility](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/compatibility), [Heft migration](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/toolchain/migrate-gulptoolchain-hefttoolchain-manual), [PnP compatibility](https://microsoft-search.github.io/pnp-modern-search/extensibility/extensibility_compatibility_matrix/).

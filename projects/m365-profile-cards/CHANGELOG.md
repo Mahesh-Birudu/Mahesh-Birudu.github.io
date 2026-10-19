@@ -1,3 +1,8 @@
+# 1.3.1
+
+- Pin nested Handlebars to 4.7.10 to remove critical dependency alerts.
+- Document remaining upstream build-tool audit findings.
+
 # 1.3.0
 
 - Migrated from Gulp to Heft.

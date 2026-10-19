@@ -1,7 +1,7 @@
-# Setup — React profile cards 1.3.0
+# Setup — React profile cards 1.3.1
 
 1. Install or upgrade to PnP Modern Search 4.25.0 (SPFx 1.23.0). This project uses the Heft toolchain, extensibility 2.2.0, Node 22.23.3 and TypeScript 5.8.3. Do not deploy this package alongside the old PnP Search 4.16.0 target.
-2. Build and package using the README commands. Deploy the version 1.3.0.0 SPPKG to your tenant or site app catalog. Install or update the site app if needed.
+2. Build and package using the README commands. Deploy the version 1.3.1.0 SPPKG to your tenant or site app catalog. Install or update the site app if needed.
 3. Review and approve Microsoft Graph `User.Read.All`, `ProfilePhoto.Read.All`, and `Presence.Read.All` in SharePoint Admin Center → Advanced → API access. Organizational admin approval is environment-specific.
 4. Upload `templates/profile-cards.html` into the target site's Site Assets library.
 5. Add PnP Search Results with SharePoint Search and Local People Results. Use `{searchTerms}` with a connected search box, or `*` for a default directory query. Select `AccountName` at minimum. Use a UPN, Entra object ID, or membership claim, never a display name.

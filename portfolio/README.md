@@ -30,4 +30,4 @@ Open http://127.0.0.1:4184. Edit the source files and rebuild before refreshing.
 
 Run these commands from the portfolio/ folder. Commit source changes to main. The Pages workflow builds a clean dist/ artifact, validates links and CSP, and publishes to the existing GitHub Pages address. dist/ is ignored by Git so generated deployment copies do not clutter the repository. Historical public URLs remain usable through generated compatibility files. The repository and website intentionally remain public.
 
-The demo uses synthetic data. The recorded walkthrough shows version 1.1.0; the interactive React demo and source downloads are version 1.3.0. SharePoint deployment and Graph permissions are described in the M365 repository.
+The demo uses synthetic data. The recorded walkthrough shows version 1.1.0; the interactive React demo and source downloads are version 1.3.1. SharePoint deployment and Graph permissions are described in the M365 repository.

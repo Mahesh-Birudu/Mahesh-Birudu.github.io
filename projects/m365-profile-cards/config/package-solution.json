@@ -3,7 +3,7 @@
   "solution": {
     "name": "m365-profile-cards-client-side-solution",
     "id": "a1fca27b-298d-40e5-b15d-a86d6a3944db",
-    "version": "1.3.0.0",
+    "version": "1.3.1.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

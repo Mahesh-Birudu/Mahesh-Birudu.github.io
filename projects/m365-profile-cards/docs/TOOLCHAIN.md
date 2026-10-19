@@ -1,4 +1,4 @@
-# Supported toolchain — 1.3.0
+# Supported toolchain — 1.3.1
 
 | Tool | Pinned version |
 | --- | --- |
