@@ -1,85 +1,8 @@
 <content id="data-content">
-  <style>
-    .m365-presence{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#334b5c;margin:6px 0}
-    .m365-presence:before{content:'';display:inline-block;width:10px;height:10px;border-radius:50%;background:#687580;border:1px solid #fff;box-shadow:0 0 0 1px #687580}
-    .m365-presence[data-presence="available"]:before{background:#107c10;box-shadow:0 0 0 1px #107c10}
-    .m365-presence[data-presence="busy"]:before,.m365-presence[data-presence="dnd"]:before{background:#c4314b;box-shadow:0 0 0 1px #c4314b}
-    .m365-presence[data-presence="away"]:before{background:#9b6c00;box-shadow:0 0 0 1px #9b6c00}
-    .m365-presence[data-presence="offline"]:before{background:white;box-shadow:0 0 0 1px #687580}
-    .m365-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;padding:12px 4px;font-family:Segoe UI,Arial,sans-serif}
-    m365-profile-card{display:block;min-width:0;--profile-accent:#0078d4;--profile-ink:#172a3a}
-    m365-profile-card [hidden]{display:none!important}
-    .m365-profile-card{position:relative;overflow:hidden;border-radius:14px;background:white;color:var(--profile-ink);box-shadow:0 4px 18px #102b3c26;border:1px solid #dce5ec}
-    .m365-profile-main{position:relative;display:grid;grid-template-columns:108px minmax(0,1fr);gap:22px;padding:38px 26px 28px;min-height:220px;isolation:isolate}
-    .m365-profile-main:before{content:'';position:absolute;inset:0 auto 0 0;width:92px;background:var(--profile-accent);z-index:-1;clip-path:polygon(0 0,90% 0,100% 25%,40% 25%,40% 100%,0 100%)}
-    .m365-profile-photo-frame{background:#eef4f8;border:4px solid white;outline:3px solid var(--profile-accent);height:134px;align-self:center;display:grid;place-items:center;overflow:hidden}
-    .m365-profile-photo{width:100%;height:100%;object-fit:cover;grid-area:1/1}
-    .m365-profile-initials{font-size:30px;font-weight:600;color:#075ca2;grid-area:1/1}
-    .m365-profile-summary{align-self:center;min-width:0}
-    .m365-profile-name{font-size:22px;line-height:1.25;letter-spacing:.2px;margin:0 0 8px;overflow-wrap:anywhere}
-    .m365-profile-title{font-size:17px;margin:0 0 10px;line-height:1.35;overflow-wrap:anywhere}
-    .m365-profile-line{font-size:13px;margin:4px 0;overflow-wrap:anywhere}
-    .m365-profile-footer{background:var(--profile-accent);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:white;border-radius:60% 0 0 0 / 22px 0 0 0;min-height:76px}
-    .m365-profile-company{font-size:21px;font-weight:600;overflow-wrap:anywhere;line-height:1.2}
-    .m365-profile-open{border:1px solid #ffffff9c;color:white;background:#ffffff18;border-radius:6px;padding:9px 12px;font:600 12px Segoe UI,Arial;cursor:pointer;white-space:nowrap}
-    .m365-profile-open:disabled{opacity:.6;cursor:default}
-    .m365-profile-status{font-size:12px;margin:0;padding:0 22px;background:#f3f7fa;color:#304c60;line-height:1.6;overflow-wrap:anywhere}
-    .m365-profile-status:not(:empty){padding:10px 22px}
-    .m365-profile-retry{margin:10px 22px;padding:7px 15px;cursor:pointer}
-    .m365-profile-dialog{border:1px solid #c5d5e1;border-radius:16px;padding:0;width:min(580px,calc(100vw - 32px));max-height:85vh;color:var(--profile-ink);background:white;box-shadow:0 24px 80px #0004;font-family:Segoe UI,Arial,sans-serif}
-    .m365-profile-dialog::backdrop{background:#0b263c99}
-    .m365-profile-dialog-header{background:#eaf4fc;padding:28px;position:relative;border-bottom:4px solid var(--profile-accent)}
-    .m365-profile-dialog-header h2{font-size:25px;padding-right:24px;margin:0 0 8px;overflow-wrap:anywhere}
-    .m365-profile-close{position:absolute;top:12px;right:14px;background:white;border:1px solid #bfd3e1;border-radius:50%;width:32px;height:32px;font-size:22px;cursor:pointer}
-    .m365-profile-details{display:grid;grid-template-columns:130px minmax(0,1fr);gap:15px 18px;padding:25px 28px;margin:0;font-size:14px}
-    .m365-profile-details dt{color:#536a7c;font-weight:600}.m365-profile-details dd{margin:0;overflow-wrap:anywhere}
-    m365-profile-card a{color:#0065aa}m365-profile-card button:focus-visible,m365-profile-card a:focus-visible{outline:3px solid #a95200;outline-offset:3px}
-    @media(max-width:420px){.m365-profile-main{grid-template-columns:80px minmax(0,1fr);gap:17px;padding:28px 18px}.m365-profile-photo-frame{height:108px}.m365-profile-name{font-size:19px}.m365-profile-company{font-size:17px}.m365-profile-footer{padding:16px}.m365-profile-details{grid-template-columns:1fr;gap:6px}.m365-profile-details dd{margin-bottom:10px}}
-  </style>
+  <style>.m365-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;padding:12px 4px}</style>
   <div class="m365-profile-grid">
     {{#each data.items as |item|}}
-      {{!-- AccountName must be selected in the SharePoint Search data source. Use UPN or Entra ID, never a display name. --}}
-      <m365-profile-card data-user-id="{{item.AccountName}}">
-        <article class="m365-profile-card">
-          <div class="m365-profile-main">
-            <div class="m365-profile-photo-frame">
-              <span class="m365-profile-initials js-profile-initials" aria-hidden="true">?</span>
-              <img class="m365-profile-photo js-profile-photo" alt="" hidden />
-            </div>
-            <div class="m365-profile-summary">
-              <h3 class="m365-profile-name js-profile-name">{{item.PreferredName}}</h3>
-              {{!-- Live presence is hydrated by the registered component, not SharePoint Search. --}}
-              <span class="m365-presence js-profile-presence" data-presence="unknown" role="status" aria-label="Teams status: Loading"><span class="js-profile-presence-label">Loading Teams status…</span></span>
-              <p class="m365-profile-title js-profile-title">{{item.JobTitle}}</p>
-              <p class="m365-profile-line js-profile-email">{{item.WorkEmail}}</p>
-              <p class="m365-profile-line js-profile-phone">{{item.WorkPhone}}</p>
-            </div>
-          </div>
-          <div class="m365-profile-footer">
-            <span class="m365-profile-company js-profile-company">{{item.Company}}</span>
-            <button class="m365-profile-open js-profile-open" type="button" aria-haspopup="dialog" disabled>View profile ↗</button>
-          </div>
-          <p class="m365-profile-status js-profile-status" role="status" aria-live="polite">Loading profile…</p>
-          <button class="m365-profile-retry js-profile-retry" type="button" hidden>Try again</button>
-        </article>
-        <dialog class="m365-profile-dialog js-profile-dialog" aria-label="User profile details">
-          <div class="m365-profile-dialog-header">
-            <button class="m365-profile-close js-profile-close" type="button" aria-label="Close profile" autofocus>×</button>
-            <h2 class="js-profile-name"></h2><p class="js-profile-title"></p>
-          </div>
-          <dl class="m365-profile-details">
-            <dt>Teams status</dt><dd><span class="m365-presence js-profile-presence" data-presence="unknown"><span class="js-profile-presence-label">Loading Teams status…</span></span></dd>
-            <dt>Company</dt><dd class="js-profile-company"></dd>
-            <dt>Department</dt><dd class="js-profile-department"></dd>
-            <dt>Email</dt><dd><a class="js-profile-email-link"><span class="js-profile-email"></span></a></dd>
-            <dt>Business phone</dt><dd class="js-profile-phone"></dd>
-            <dt>Mobile</dt><dd class="js-profile-mobile"></dd>
-            <dt>Office</dt><dd class="js-profile-office"></dd>
-            <dt>Address</dt><dd class="js-profile-address"></dd>
-            <dt>User principal name</dt><dd class="js-profile-upn"></dd>
-          </dl>
-        </dialog>
-      </m365-profile-card>
+      <m365-profile-details data-user-id="{{item.AccountName}}" data-theme-variant="{{JSONstringify @root.theme}}"></m365-profile-details>
     {{else}}
       <p>No people found. Try a different search.</p>
     {{/each}}

@@ -1,0 +1,4 @@
+# The browser demo is compiled from projects/m365-profile-cards React source.
+/profile-cards-demo.js linguist-generated=true
+*.sppkg binary
+*.zip binary
