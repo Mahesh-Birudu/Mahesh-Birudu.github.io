@@ -1,0 +1,21 @@
+name: Package branded search release
+on:
+  push:
+    paths: ['.github/workflows/package-search-release.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Publish validated packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 39312087554 -n branded-search-m365-search-filters -D filters
+          gh run download 39312087554 -n branded-search-m365-profile-cards -D cards
+          mkdir packages
+          find filters cards -name '*.sppkg' -exec cp {} packages/ \;
+          gh release create search-brand-v1 --target main --title "Branded search filters 1.0.0 and profile cards 1.4.0" --notes "SPFx 1.23 / Heft packages. Filters and profile results share branding. Configure refinable managed properties and PnP web part connections per project README. Both packages passed tests, TypeScript and production builds." packages/*.sppkg
