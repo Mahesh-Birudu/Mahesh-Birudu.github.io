@@ -1,0 +1,22 @@
+{
+  "extends": "./node_modules/@microsoft/spfx-web-build-rig/profiles/default/tsconfig-base.json",
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "types": [
+      "webpack-env"
+    ],
+    "target": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "importsNotUsedAsValues": null
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}

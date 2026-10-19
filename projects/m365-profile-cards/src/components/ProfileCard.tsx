@@ -1,3 +1,4 @@
+import { brandStyle } from '@mahesh/m365-search-brand';
 import * as React from 'react';
 import { ProfileProvider } from '../models/Profile';
 import { useProfile } from '../hooks/useProfile';
@@ -14,8 +15,8 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ userId, provider, them
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => setOpen(false), [userId]);
   const name = profile?.displayName || 'Unnamed user';
-  const style = themeVariant?.palette?.themePrimary ? { '--profile-accent': themeVariant.palette.themePrimary } as React.CSSProperties : undefined;
-  return <div style={style} aria-busy={loading}><style>{profileStyles}</style>
+  const style = { ...brandStyle(themeVariant), '--profile-accent': 'var(--m365-primary)', '--profile-ink': 'var(--m365-ink)', fontFamily: 'var(--m365-font)' } as React.CSSProperties;
+  return <div className="m365-search-brand" style={style} aria-busy={loading}><style>{profileStyles}</style>
     <article className="m365-profile-card">
       {profile && <><div className="m365-profile-main"><ProfilePhoto name={name} url={photoUrl} /><div className="m365-profile-summary">
         <h3 className="m365-profile-name">{name}</h3><PresenceBadge {...presence} />

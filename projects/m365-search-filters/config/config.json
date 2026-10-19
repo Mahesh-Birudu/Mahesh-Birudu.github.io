@@ -1,0 +1,1 @@
+{"$schema":"https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json","version":"2.0","bundles":{"m365-search-filters-library":{"components":[{"entrypoint":"./lib/libraries/searchFilters/SearchFiltersLibrary.js","manifest":"./src/libraries/searchFilters/SearchFiltersLibrary.manifest.json"}]}},"externals":{},"localizedResources":{}}
