@@ -1,7 +1,7 @@
-# Setup — React profile cards 1.2.0
+# Setup — React profile cards 1.3.0
 
-1. Confirm PnP Modern Search 4.16.0 / extensibility 1.20.1 compatibility with your SPFx 1.20 tenant solution.
-2. Build and package using the README commands. Deploy the version 1.2.0.0 SPPKG to your tenant or site app catalog. Install or update the site app if needed.
+1. Install or upgrade to PnP Modern Search 4.25.0 (SPFx 1.23.0). This project uses the Heft toolchain, extensibility 2.2.0, Node 22.23.3 and TypeScript 5.8.3. Do not deploy this package alongside the old PnP Search 4.16.0 target.
+2. Build and package using the README commands. Deploy the version 1.3.0.0 SPPKG to your tenant or site app catalog. Install or update the site app if needed.
 3. Review and approve Microsoft Graph `User.Read.All`, `ProfilePhoto.Read.All`, and `Presence.Read.All` in SharePoint Admin Center → Advanced → API access. Organizational admin approval is environment-specific.
 4. Upload `templates/profile-cards.html` into the target site's Site Assets library.
 5. Add PnP Search Results with SharePoint Search and Local People Results. Use `{searchTerms}` with a connected search box, or `*` for a default directory query. Select `AccountName` at minimum. Use a UPN, Entra object ID, or membership claim, never a display name.
@@ -13,7 +13,7 @@
 
 The external Handlebars file owns the result loop, grid, empty state, pagination and attributes. React owns all internal card and dialog UI. Customize React components for additional fields or popup layout; rebuild and redeploy after code changes. CSS/theme overrides can adjust appearance.
 
-## Upgrade from 1.1.0
+## Upgrade from 1.1.0 or 1.2.0
 
 Update both the package and template together. The old tag is a compatibility alias and still mounts the React card, but class-based HTML hydration is removed. Existing old template child markup is replaced when React mounts. GUIDs and Graph permission scopes are unchanged.
 
