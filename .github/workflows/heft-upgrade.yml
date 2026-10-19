@@ -1,4 +1,4 @@
-name: Validate and publish Heft migration
+name: Finalize Heft repository cleanup
 on:
   workflow_dispatch:
 permissions:
@@ -7,61 +7,40 @@ concurrency:
   group: portfolio-pages
   cancel-in-progress: false
 jobs:
-  upgrade:
+  cleanup:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
-        with:
-          node-version: 22.23.3
-      - name: Apply reviewed source
+      - name: Remove generated packaging copies and prevent recurrence
         run: |
+          git rm -r --ignore-unmatch projects/m365-profile-cards/sharepoint/solution/debug
           python3 - <<'PY'
-          import pathlib, zipfile, shutil
-          root = pathlib.Path.cwd().resolve()
-          with zipfile.ZipFile('heft-upgrade.zip') as archive:
-              for entry in archive.infolist():
-                  p = pathlib.PurePosixPath(entry.filename)
-                  if p.is_absolute() or '..' in p.parts or '\\' in entry.filename or p.parts[0] not in {'portfolio','projects','README.md','.gitattributes','.gitignore'}:
-                      raise SystemExit('Unexpected archive entry')
-              target = root / 'm365-profile-cards'
-              if target.is_dir() and target.resolve().parent == root:
-                  shutil.rmtree(target)
-              archive.extractall(root)
+          import pathlib
+          file = pathlib.Path('projects/m365-profile-cards/.gitignore')
+          content = file.read_text()
+          for pattern in ['sharepoint/solution/debug/', 'lib-dts/', 'lib-esm/']:
+              if pattern not in content.splitlines():
+                  content += '\n' + pattern + '\n'
+          file.write_text(content)
           PY
-      - run: npm ci --no-fund --no-audit
-        working-directory: projects/m365-profile-cards
-      - run: npm run typecheck
-        working-directory: projects/m365-profile-cards
-      - run: npm test
-        working-directory: projects/m365-profile-cards
-      - run: npm run build
-        working-directory: projects/m365-profile-cards
-      - run: npm run package
-        working-directory: projects/m365-profile-cards
-      - run: npm run preview:build
-        working-directory: projects/m365-profile-cards
-      - run: node scripts/sync-showcase.mjs
-        working-directory: projects/m365-profile-cards
       - run: python3 scripts/package-source.py
         working-directory: projects/m365-profile-cards
       - run: npm run build && npm run check
         working-directory: portfolio
-      - name: Commit only after all checks pass
+      - name: Commit source-only cleanup
         run: |
-          rm heft-upgrade.zip
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m 'Migrate profile cards to Heft and consolidate project links'
+          git add projects/m365-profile-cards/.gitignore portfolio/projects/m365-profile-cards/downloads/source.zip
+          git commit -m 'Exclude generated SPFx packaging copies from source'
           git push origin HEAD:main
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: portfolio/dist
   deploy:
-    needs: upgrade
+    needs: cleanup
     runs-on: ubuntu-24.04
     permissions:
       pages: write
