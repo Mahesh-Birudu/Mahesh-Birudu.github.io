@@ -1,0 +1,29 @@
+name: SPFx Heft checks
+on:
+  push:
+    branches: [main]
+    paths: ['projects/m365-profile-cards/**']
+  pull_request:
+    paths: ['projects/m365-profile-cards/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: projects/m365-profile-cards
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.23.3
+      - run: npm ci --no-fund --no-audit
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run package
+
