@@ -1,24 +1,33 @@
-# Mahesh Babu Birudu — Portfolio and Microsoft 365 projects
+# Mahesh Babu Birudu — Portfolio
 
-[Live portfolio](https://mahesh-birudu.github.io/) · [Profile Cards demo](https://mahesh-birudu.github.io/profile-cards-demo.html)
+Public portfolio: https://mahesh-birudu.github.io/
 
-## Browse the code
+## Source structure
 
-| Folder | Contents |
-| --- | --- |
-| [portfolio](portfolio/) | Named portfolio pages, styles, project carousel and video UI source |
-| [projects/m365-profile-cards](projects/m365-profile-cards/) | SPFx 1.2.0 source, React components/hooks, PnPjs service, Handlebars template, tests and setup |
+- **src/components/** — Header, Hero, Expertise, Experience, Projects, Contact, Footer and DemoDialog. Expand each named HTML file to edit its section.
+- **src/pages/** — main page shell and Microsoft 365 project detail page.
+- **src/styles/** and **src/scripts/** — portfolio styles, carousel behavior and project metadata.
+- **public/assets/** — portrait, public résumé and icon licenses.
+- **public/projects/m365-profile-cards/** — synthetic demo, recorded walkthrough and public downloads.
+- **scripts/** — dependency-free build, link checks and local preview.
+- **.github/workflows/pages.yml** — builds, validates and deploys only dist/ to GitHub Pages.
 
-Expand `projects → m365-profile-cards → src → components` in GitHub's file tree to inspect `ProfileCard.tsx`, `ProfileDetailsDialog.tsx`, `PresenceBadge.tsx` and `ProfilePhoto.tsx`. The implementation is available as individual files, not only inside a ZIP.
+The production React/SPFx source is maintained separately at [m365-profile-cards](https://github.com/Mahesh-Birudu/m365-profile-cards). Its components, services, hooks, tests and configuration belong in that repository.
 
-The public root HTML/JS/CSS files are the GitHub Pages deployment copy, retained to preserve published URLs. `portfolio/` contains the organized review copy and references shared public assets at the root. See [portfolio README](portfolio/README.md).
+## Local development
 
-## Profile Cards
+Use Node.js 22 or newer. No npm dependency installation is required.
 
-[Project guide](M365-PROFILE-CARDS.md) · [Architecture](projects/m365-profile-cards/docs/ARCHITECTURE.md) · [Setup](projects/m365-profile-cards/docs/SETUP.md)
+```sh
+npm run build
+npm run check
+npm run preview
+```
 
-`Handlebars → m365-profile-details → BaseWebComponent → React → PnPjs → Microsoft Graph`
+Open http://127.0.0.1:4184. Edit the source files and rebuild before refreshing. Add future carousel projects in src/scripts/projects.js.
 
-GitHub publication does not deploy the SPPKG to SharePoint or upload the external template into Site Assets. Upgrade package and template together for production.
+## Publication
 
-The interactive demo uses current React components and fictional directory fixtures. The captioned video shows the earlier visual implementation. Never add tenant credentials or client data to this public repository.
+Commit source changes to main. The Pages workflow builds a clean dist/ artifact, validates links and CSP, and publishes to the existing GitHub Pages address. dist/ is ignored by Git so generated deployment copies do not clutter the repository. Historical public URLs remain usable through generated compatibility files. The repository and website intentionally remain public.
+
+The demo uses synthetic data. The recorded walkthrough shows version 1.1.0; the interactive React demo and source downloads are version 1.2.0. SharePoint deployment and Graph permissions are described in the M365 repository.
