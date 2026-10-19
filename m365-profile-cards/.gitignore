@@ -1,0 +1,9 @@
+node_modules/
+lib/
+lib-commonjs/
+temp/
+release/
+dist/
+*.log
+.heft/
+sharepoint/solution/*.sppkg

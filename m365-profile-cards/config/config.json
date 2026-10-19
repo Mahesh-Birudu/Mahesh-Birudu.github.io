@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "m365-profile-library": {
+      "components": [{
+        "entrypoint": "./lib/libraries/profileCards/ProfileCardsLibrary.js",
+        "manifest": "./src/libraries/profileCards/ProfileCardsLibrary.manifest.json"
+      }]
+    }
+  },
+  "externals": {},
+  "localizedResources": {}
+}

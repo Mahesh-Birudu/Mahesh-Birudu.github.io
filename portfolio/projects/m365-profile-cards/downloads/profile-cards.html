@@ -1,0 +1,24 @@
+<content id="data-content">
+  <style>.m365-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;padding:12px 4px}</style>
+  <div class="m365-profile-grid">
+    {{#each data.items as |item|}}
+      <m365-profile-details data-user-id="{{item.AccountName}}" data-theme-variant="{{JSONstringify @root.theme}}"></m365-profile-details>
+    {{else}}
+      <p>No people found. Try a different search.</p>
+    {{/each}}
+  </div>
+  {{#if @root.properties.paging.showPaging}}
+    {{#gt @root.data.totalItemsCount @root.properties.paging.itemsCountPerPage}}
+      <pnp-pagination
+        data-total-items="{{@root.data.totalItemsCount}}"
+        data-hide-first-last-pages="{{@root.properties.paging.hideFirstLastPages}}"
+        data-hide-disabled="{{@root.properties.paging.hideDisabled}}"
+        data-hide-navigation="{{@root.properties.paging.hideNavigation}}"
+        data-range="{{@root.properties.paging.pagingRange}}"
+        data-items-count-per-page="{{@root.properties.paging.itemsCountPerPage}}"
+        data-current-page-number="{{@root.paging.currentPageNumber}}">
+      </pnp-pagination>
+    {{/gt}}
+  {{/if}}
+</content>
+<content id="placeholder-content"><p role="status">Searching the people directory…</p></content>
