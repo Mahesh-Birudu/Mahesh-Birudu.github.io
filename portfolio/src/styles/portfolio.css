@@ -12,3 +12,6 @@
 .github-action{display:inline-flex;align-items:center;gap:8px}.project-links .quiet-link{display:inline-flex;gap:7px}.project-links .ui-icon,.video-trigger .ui-icon{width:16px;height:16px}.video-trigger{display:inline-flex;align-items:center;gap:6px}@media(max-width:650px){.portrait-panel{width:240px}.portrait-panel figcaption{display:block;height:auto;padding:13px 12px;text-align:center}.portrait-panel strong{font-size:13px}.portrait-panel figcaption div>span{max-width:none;font-size:10px;line-height:1.5;margin-top:5px}}
 
 .hero-actions .ui-icon,.quiet-link>.ui-icon{width:17px;height:17px}@media(max-width:650px){.current-role{display:none}}
+
+/* Consistent Fluent action icon box across every breakpoint. */
+.button .ui-icon,.quiet-link .ui-icon,.project-links .ui-icon{width:20px;height:20px;flex:0 0 20px}
