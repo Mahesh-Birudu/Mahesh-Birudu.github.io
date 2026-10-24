@@ -1,6 +1,6 @@
 {
-  "name": "m365-column-splitter",
-  "version": "2.0.1",
+  "name": "m365-extensions",
+  "version": "1.4.2",
   "private": true,
   "engines": {
     "node": ">=22.22.2 <23"
@@ -9,17 +9,21 @@
     "build": "heft build --clean --production",
     "package": "heft package-solution --production",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts",
-    "preview:build": "node scripts/preview.cjs"
+    "test": "tsx --test --test-timeout=60000 tests/*.test.tsx",
+    "preview:build": "node scripts/build-preview.cjs",
+    "preview": "node scripts/serve-preview.cjs"
   },
   "dependencies": {
     "@microsoft/sp-core-library": "1.23.0",
-    "@microsoft/sp-webpart-base": "1.23.0",
-    "@microsoft/sp-property-pane": "1.23.0",
-    "@mahesh/m365-search-brand": "file:../m365-search-brand",
+    "@microsoft/sp-application-base": "1.23.0",
+    "@microsoft/sp-http": "1.23.0",
+    "@pnp/sp": "4.22.0",
+    "@mahesh/m365-search-brand": "file:../../libraries/m365-search-brand",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "tslib": "2.8.1"
+    "tslib": "2.8.1",
+    "@fluentui/react": "8.125.8",
+    "@microsoft/sp-page-context": "1.23.0"
   },
   "devDependencies": {
     "@microsoft/spfx-web-build-rig": "1.23.0",
@@ -36,5 +40,6 @@
     "tsx": "4.23.15",
     "esbuild": "0.28.2",
     "jsdom": "26.1.0"
-  }
+  },
+  "packageManager": "npm@10.9.9"
 }

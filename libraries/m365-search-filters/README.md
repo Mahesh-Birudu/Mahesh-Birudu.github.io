@@ -23,7 +23,7 @@ A separate SPFx **library component** for PnP Modern Search 4.25.0, built with H
 - Clone the repository with sibling `m365-search-brand` and `m365-profile-cards` folders; local package dependencies rely on that structure.
 
 ```sh
-cd projects/m365-search-filters
+cd libraries/m365-search-filters
 npm ci
 npm run typecheck
 npm test

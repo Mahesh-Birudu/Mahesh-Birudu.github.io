@@ -58,10 +58,10 @@ Replace the package in the app catalog, update the installed site app if request
 
 ## Downloads and demo
 
-- [SPFx package 1.5.1.0](../../portfolio/projects/m365-profile-cards/downloads/m365-profile-cards.sppkg)
-- [Buildable source snapshot](../../portfolio/projects/m365-profile-cards/downloads/source.zip)
-- [Captioned visual walkthrough — 1.1.0](../../portfolio/projects/m365-profile-cards/media/demo.mp4)
-- Compiled demo is in [the portfolio showcase](../../portfolio/projects/m365-profile-cards/); editable React preview source is in [preview](preview/); run the preview commands above for the interactive version.
+- [SPFx package 1.5.1.0](../../portfolio/libraries/m365-profile-cards/downloads/m365-profile-cards.sppkg)
+- [Buildable source snapshot](../../portfolio/libraries/m365-profile-cards/downloads/source.zip)
+- [Captioned visual walkthrough — 1.1.0](../../portfolio/libraries/m365-profile-cards/media/demo.mp4)
+- Compiled demo is in [the portfolio showcase](../../portfolio/libraries/m365-profile-cards/); editable React preview source is in [preview](preview/); run the preview commands above for the interactive version.
 
 This folder contains the SPFx project. Website pages, demo media and downloadable artifacts are under ../../portfolio/.
 

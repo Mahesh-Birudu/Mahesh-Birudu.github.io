@@ -6,13 +6,13 @@ This guide describes the source published with the portfolio, not a tenant provi
 
 | Component | Folder | Package version | Purpose |
 | --- | --- | --- | --- |
-| Company header, profile menu, stock, cascading navigation | projects/m365-extensions | 1.4.2.0 | Application Customizer with modules and owner settings |
+| Company header, profile menu, stock, cascading navigation | extensions/m365-extensions | 1.4.2.0 | Application Customizer with modules and owner settings |
 | Home carousel | webparts/carousel | 1.0.1.0 | Static page properties, inline editor, image frame and quick links |
-| People profile cards | projects/m365-profile-cards | 1.5.1.0 | PnP extensibility library, Graph profiles/photos/presence, right slide-out |
-| Search filters | projects/m365-search-filters | 1.0.6.0 | Searchable popup options, Apply/Clear and selected chips |
-| Search verticals | projects/m365-search-verticals | 1.0.0.0 | Configurable tabs and PnP dynamic-data source |
-| Page Column Controller | projects/m365-column-splitter | 2.0.1.0 | Groups existing web parts by container name and percentage |
-| Shared brand tokens | projects/m365-search-brand | 1.0.0 | Local package consumed by sibling projects; no SPPKG |
+| People profile cards | libraries/m365-profile-cards | 1.5.1.0 | PnP extensibility library, Graph profiles/photos/presence, right slide-out |
+| Search filters | libraries/m365-search-filters | 1.0.6.0 | Searchable popup options, Apply/Clear and selected chips |
+| Search verticals | webparts/m365-search-verticals | 1.0.0.0 | Configurable tabs and PnP dynamic-data source |
+| Page Column Controller | webparts/m365-column-splitter | 2.0.1.0 | Groups existing web parts by container name and percentage |
+| Shared brand tokens | libraries/m365-search-brand | 1.0.0 | Local package consumed by sibling projects; no SPPKG |
 
 The validated integration target is PnP Modern Search 4.25.0, SPFx 1.23.0, React 17.0.1, TypeScript 5.8.3, Heft 1.3.3 and Node 22.23.3. PnPjs is 4.22.0 where used. These are pinned project versions, not a recommendation to upgrade unrelated tenants to whatever is newest. Keep sibling folders together because file dependencies resolve relatively.
 
@@ -28,10 +28,10 @@ The header's native Microsoft suite-bar adapter and the column controller's page
 
 ## 3. Build the complete source
 
-Clone the repository and keep projects/ and webparts/ together. Each project is independently buildable. The shared brand package has no separate runtime deployment.
+Clone the repository and keep libraries/, extensions/ and webparts/ together. Each project is independently buildable. The shared brand package has no separate runtime deployment.
 
 ```powershell
-cd projects/m365-profile-cards
+cd libraries/m365-profile-cards
 npm ci
 npm run typecheck
 npm test
@@ -129,7 +129,7 @@ Add M365 Search Verticals, PnP Search Results and PnP Search Filters to a modern
 
 Connect the query to your search box, or use Page environment → Query string → Query parameters → k with default *. With the custom verticals, the validated query template is {searchTerms} {verticals.value}. Configure each vertical value as a deliberate query restriction; a tab label alone does not create a data source. Connect Results to the custom vertical source property pnpSearchVerticalsWebPart. Ensure all Results instances have explicit connections and visibility rules.
 
-Upload projects/m365-profile-cards/templates/profile-cards.html to Site Assets. In Results enable extensibility library e425e0ca-e11c-45c6-80b2-94c5e6b035ae, keep the built-in library enabled, choose Custom layout and enter the external template URL. The template emits m365-profile-details with data-user-id from AccountName; React renders the card and slide-out. Enable paging, then publish.
+Upload libraries/m365-profile-cards/templates/profile-cards.html to Site Assets. In Results enable extensibility library e425e0ca-e11c-45c6-80b2-94c5e6b035ae, keep the built-in library enabled, choose Custom layout and enter the external template URL. The template emits m365-profile-details with data-user-id from AccountName; React renders the card and slide-out. Enable paging, then publish.
 
 The search index and Graph can temporarily disagree after a profile edit. Confirm the raw search result AccountName and refiner values before treating a missing result as a React defect. Account visibility and security trimming remain server responsibilities.
 

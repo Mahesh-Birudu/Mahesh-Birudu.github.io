@@ -2,7 +2,7 @@
 
 One versioned, dependency-free visual contract for profile results, filters and search verticals. `brandStyle(theme)` produces CSS custom properties on each component root. The explicit product palette stays consistent across site themes. The optional theme argument remains accepted for API compatibility.
 
-The package is used through a local `file:../m365-search-brand` dependency. Update this folder once, rebuild the SPFx projects and redeploy their packages. The package does not inject global styles or modify Microsoft/PnP DOM. Presence colors remain semantic (green/busy red/away amber/offline) rather than being recolored by branding.
+The package is used through a local file dependency: `file:../m365-search-brand` from sibling libraries or `file:../../libraries/m365-search-brand` from extensions/web parts. Update this folder once, rebuild the SPFx projects and redeploy their packages. The package does not inject global styles or modify Microsoft/PnP DOM. Presence colors remain semantic (green/busy red/away amber/offline) rather than being recolored by branding.
 
 | Token | Default |
 | --- | --- |

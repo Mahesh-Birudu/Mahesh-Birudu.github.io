@@ -1,6 +1,6 @@
 {
-  "name": "m365-search-verticals",
-  "version": "1.0.0",
+  "name": "m365-column-splitter",
+  "version": "2.0.1",
   "private": true,
   "engines": {
     "node": ">=22.22.2 <23"
@@ -9,20 +9,17 @@
     "build": "heft build --clean --production",
     "package": "heft package-solution --production",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test --test-timeout=60000 tests/*.test.tsx",
-    "preview:build": "tsx scripts/build-preview.ts",
-    "preview": "node scripts/serve-preview.cjs"
+    "test": "tsx --test tests/*.test.ts",
+    "preview:build": "node scripts/preview.cjs"
   },
   "dependencies": {
     "@microsoft/sp-core-library": "1.23.0",
     "@microsoft/sp-webpart-base": "1.23.0",
     "@microsoft/sp-property-pane": "1.23.0",
-    "@mahesh/m365-search-brand": "file:../m365-search-brand",
+    "@mahesh/m365-search-brand": "file:../../libraries/m365-search-brand",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "tslib": "2.8.1",
-    "@microsoft/sp-dynamic-data": "1.23.0",
-    "@fluentui/react": "8.125.8"
+    "tslib": "2.8.1"
   },
   "devDependencies": {
     "@microsoft/spfx-web-build-rig": "1.23.0",
@@ -39,6 +36,5 @@
     "tsx": "4.23.15",
     "esbuild": "0.28.2",
     "jsdom": "26.1.0"
-  },
-  "packageManager": "npm@10.9.9"
+  }
 }

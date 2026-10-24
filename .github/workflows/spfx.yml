@@ -2,9 +2,9 @@ name: SPFx Heft checks
 on:
   push:
     branches: [main]
-    paths: ['projects/**', 'webparts/**', '.github/workflows/spfx.yml']
+    paths: ['extensions/**', 'libraries/**', 'webparts/**', '.github/workflows/spfx.yml']
   pull_request:
-    paths: ['projects/**', 'webparts/**', '.github/workflows/spfx.yml']
+    paths: ['extensions/**', 'libraries/**', 'webparts/**', '.github/workflows/spfx.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        project: [projects/m365-profile-cards, projects/m365-search-filters, projects/m365-search-verticals, projects/m365-extensions, projects/m365-column-splitter, webparts/carousel]
+        project: [libraries/m365-profile-cards, libraries/m365-search-filters, webparts/m365-search-verticals, extensions/m365-extensions, webparts/m365-column-splitter, webparts/carousel]
     defaults:
       run:
         working-directory: ${{ matrix.project }}

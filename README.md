@@ -6,20 +6,28 @@ The repository contains the complete modular SharePoint intranet source plus the
 
 - [Interactive intranet demo + 11-step guided tour](https://mahesh-birudu.github.io/projects/dev-stories-intranet/demo.html)
 - [Project showcase and full browser-readable setup guide](https://mahesh-birudu.github.io/projects/dev-stories-intranet/)
-- [Original profile-card project](projects/m365-profile-cards/)
+- [Original profile-card project](libraries/m365-profile-cards/)
+
+## Project categories
+
+- `webparts/`: SPFx web parts added to modern pages.
+- `extensions/`: SPFx extensions such as Application Customizers.
+- `libraries/`: PnP Search extensibility libraries, registered custom web components and shared code packages.
+
+See [folder rules and migration map](docs/PROJECT-STRUCTURE.md). Future projects must follow [AGENTS.md](AGENTS.md). The portfolio keeps its public `/projects/` URLs; these are website routes, not the source folder.
 
 ## Source map
 
 | Folder | Responsibility |
 | --- | --- |
 | portfolio/ | Portfolio pages, interactive sandbox, guided tour, public documentation and selected downloads |
-| projects/m365-extensions/ | Company header, user-profile callout, stock drawer/API configuration, cascading menu and owner settings |
+| extensions/m365-extensions/ | Company header, user-profile callout, stock drawer/API configuration, cascading menu and owner settings |
 | webparts/carousel/ | Static configurable carousel, image frame, slide editor and quick access |
-| projects/m365-profile-cards/ | Graph-backed people cards, photos, presence and right-side profile slide-out |
-| projects/m365-search-filters/ | Searchable popup filters, compact Apply/Clear and immediate chip removal |
-| projects/m365-search-verticals/ | Configurable PnP-compatible search categories |
-| projects/m365-column-splitter/ | Configurable grouping/widths for existing page web parts |
-| projects/m365-search-brand/ | Shared brand tokens, kept beside consuming projects |
+| libraries/m365-profile-cards/ | Graph-backed people cards, photos, presence and right-side profile slide-out |
+| libraries/m365-search-filters/ | Searchable popup filters, compact Apply/Clear and immediate chip removal |
+| webparts/m365-search-verticals/ | Configurable PnP-compatible search categories |
+| webparts/m365-column-splitter/ | Configurable grouping/widths for existing page web parts |
+| libraries/m365-search-brand/ | Shared brand tokens consumed through local file dependencies |
 | docs/INTRANET-SETUP.md | End-to-end deployment, data preparation, configuration and troubleshooting |
 
 ## Develop

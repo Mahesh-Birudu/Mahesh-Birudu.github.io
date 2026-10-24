@@ -41,7 +41,7 @@ All results instances on a page must be configured deliberately; merely adding a
 
 ## Branding and boundaries
 
-Uses `../m365-search-brand`: red #cb202d, charcoal #2d2d2d, off-white #f4f4f2, Segoe UI and Fluent UI icons. Styles are scoped to this component. It does not override SharePoint's search-box DOM, inject arbitrary global CSS, or modify PnP internal markup. Native SharePoint search continues through the already configured query-string integration.
+Uses `../../libraries/m365-search-brand`: red #cb202d, charcoal #2d2d2d, off-white #f4f4f2, Segoe UI and Fluent UI icons. Styles are scoped to this component. It does not override SharePoint's search-box DOM, inject arbitrary global CSS, or modify PnP internal markup. Native SharePoint search continues through the already configured query-string integration.
 
 This initial version does not claim complete PnP feature parity: arbitrary PnP URL/value tokens and audience targeting are not implemented. Literal tab values/URLs are supported. Group-based security remains in the results data source.
 
