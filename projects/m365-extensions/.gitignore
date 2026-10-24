@@ -1,0 +1,10 @@
+node_modules/
+lib/
+temp/
+dist/
+release/
+sharepoint/solution/
+preview/bundle.js
+
+lib-commonjs/
+preview/dist/

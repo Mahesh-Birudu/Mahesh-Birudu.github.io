@@ -1,0 +1,1 @@
+{"$schema":"https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json","id":"35a551d5-1d37-4355-b541-97fdbcc326d5","alias":"DevStoriesCompanyHeader","componentType":"Extension","extensionType":"ApplicationCustomizer","version":"*","manifestVersion":2,"requiresCustomScript":false}

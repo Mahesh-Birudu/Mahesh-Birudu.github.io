@@ -1,0 +1,15 @@
+node_modules/
+lib/
+lib-commonjs/
+temp/
+release/
+dist/
+*.log
+.heft/
+sharepoint/solution/*.sppkg
+
+sharepoint/solution/debug/
+
+lib-dts/
+
+lib-esm/

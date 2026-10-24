@@ -1,3 +1,5 @@
+import { initializeIcons } from '@fluentui/react/lib/Icons';
+initializeIcons();
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ProfileCard } from '../src/components/ProfileCard';

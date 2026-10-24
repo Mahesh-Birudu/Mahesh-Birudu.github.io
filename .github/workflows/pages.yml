@@ -2,7 +2,7 @@ name: Portfolio Pages
 on:
   push:
     branches: [main]
-    paths: ['portfolio/**', 'projects/**']
+    paths: ['portfolio/**', 'projects/**', 'webparts/**', 'docs/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -37,7 +37,3 @@ jobs:
     steps:
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
         id: deployment
-
-
-
-

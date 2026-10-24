@@ -28,10 +28,10 @@ test('presence distinguishes unknown, offline and meeting',()=>{
   assert.equal(presenceDisplay({availability:'Busy',activity:'InAMeeting'}).label,'In a meeting');
   assert.equal(presenceDisplay().state,'unknown');
 });
-test('React escapes values and handles missing fields and popup focus',async()=>{
+test('React escapes values and handles missing fields and slide-out focus',async()=>{
   const value='<img src=x onerror=alert(1)>';
   const view=setup({getProfile:async()=>({...person,displayName:value}),getPhoto:async()=>undefined});
-  try{await tick();assert.equal(view.host.querySelector('h3')?.textContent,value);assert.equal(view.host.querySelector('h3 img'),null);assert.equal(view.host.querySelector('.m365-profile-company')?.textContent,'Not provided');
+  try{await tick();assert.equal(view.host.querySelector('h3')?.textContent,value);assert.equal(view.host.querySelector('h3 img'),null);assert.equal(view.host.querySelector('.m365-profile-title')?.textContent,'Job title not provided');
     const button=view.host.querySelector<HTMLButtonElement>('.m365-profile-open')!;button.focus();act(()=>button.click());assert.equal(view.host.querySelector('dialog')?.open,true);
     act(()=>view.host.querySelector<HTMLButtonElement>('[aria-label="Close profile"]')!.click());assert.equal(view.host.querySelector('dialog'),null);assert.equal(document.activeElement,button);
   }finally{view.cleanup();}
@@ -40,7 +40,7 @@ test('presence denial keeps card usable and never shows offline',async()=>{
   const view=setup({getProfile:async()=>person,getPhoto:async()=>undefined,getPresence:async()=>{throw new Error('403');}});
   try{await tick();assert.equal(view.host.querySelector('[data-presence]')?.getAttribute('data-presence'),'unknown');assert.ok(view.host.querySelector('.m365-profile-open'));}finally{view.cleanup();}
 });
-test('shared presence state renders in card and popup',async()=>{
+test('shared presence state renders in card and slide-out',async()=>{
   const view=setup({getProfile:async()=>person,getPhoto:async()=>undefined,getPresence:async()=>({availability:'Available'})});
   try{await tick();act(()=>view.host.querySelector<HTMLButtonElement>('.m365-profile-open')!.click());assert.equal(view.host.querySelectorAll('[data-presence="available"]').length,2);}finally{view.cleanup();}
 });
@@ -58,4 +58,17 @@ test('unmount revokes photo object URL',async()=>{
   const view=setup({getProfile:async()=>person,getPhoto:async()=>new Blob(['image'],{type:'image/png'})});
   try{await tick();assert.equal(view.host.querySelector('img')?.getAttribute('src'),'blob:test-photo');}finally{view.cleanup();URL.createObjectURL=oldCreate;URL.revokeObjectURL=oldRevoke;}
   assert.deepEqual(revoked,['blob:test-photo']);
+});
+
+test('slide-out uses the photo, branded header and icon detail rows; Escape restores focus',async()=>{
+  const oldCreate=URL.createObjectURL,oldRevoke=URL.revokeObjectURL;
+  URL.createObjectURL=()=> 'blob:drawer-photo';URL.revokeObjectURL=()=>{};
+  const view=setup({getProfile:async()=>({...person,jobTitle:'Engineer',department:'Delivery',businessPhones:['+1 555 0100']}),getPhoto:async()=>new Blob(['photo'],{type:'image/png'})});
+  try{await tick();const trigger=view.host.querySelector<HTMLButtonElement>('.m365-profile-open')!;trigger.focus();act(()=>trigger.click());
+    const panel=view.host.querySelector<HTMLDialogElement>('.m365-profile-panel')!;
+    assert.ok(panel.open);assert.equal(panel.querySelector('.m365-profile-panel-avatar img')?.getAttribute('src'),'blob:drawer-photo');
+    assert.match(panel.querySelector<HTMLElement>('.m365-profile-panel-banner')!.style.backgroundImage,/data:image\/svg/);
+    assert.equal(panel.querySelectorAll('.m365-profile-detail-row').length,9);assert.equal(panel.querySelector('a[href^="tel:"]')?.textContent,'+1 555 0100');
+    act(()=>panel.dispatchEvent(new Event('cancel',{cancelable:true})));assert.equal(view.host.querySelector('dialog'),null);assert.equal(document.activeElement,trigger);
+  }finally{view.cleanup();URL.createObjectURL=oldCreate;URL.revokeObjectURL=oldRevoke;}
 });

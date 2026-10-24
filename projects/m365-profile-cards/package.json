@@ -1,6 +1,6 @@
 {
   "name": "m365-profile-cards",
-  "version": "1.3.1",
+  "version": "1.5.1",
   "private": true,
   "overrides": {
     "handlebars": "$handlebars"
@@ -28,7 +28,9 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "@microsoft/sp-component-base": "1.23.0",
-    "@microsoft/sp-lodash-subset": "1.23.0"
+    "@microsoft/sp-lodash-subset": "1.23.0",
+    "@mahesh/m365-search-brand": "file:../m365-search-brand",
+    "@fluentui/react": "8.125.8"
   },
   "devDependencies": {
     "@microsoft/sp-module-interfaces": "1.23.0",

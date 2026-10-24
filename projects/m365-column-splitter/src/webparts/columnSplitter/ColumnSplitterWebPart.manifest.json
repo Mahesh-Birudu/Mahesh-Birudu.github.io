@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "f368302e-d9ca-44b2-b275-55390c3ab942",
+  "alias": "ColumnSplitterWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportsFullBleed": true,
+  "supportedHosts": [
+    "SharePointWebPart"
+  ],
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "M365 Page Column Controller"
+      },
+      "description": {
+        "default": "Group existing page web parts into configurable percentage columns with show/hide controls. Uses a page DOM compatibility adapter."
+      },
+      "officeFabricIconFontName": "Columns",
+      "properties": {
+        "enabled": true,
+        "groupName": "",
+        "layoutOptions": {
+          "rows": [],
+          "toggleTarget": "",
+          "hideText": "Hide container",
+          "showText": "Show container",
+          "initiallyHidden": false,
+          "gap": 16,
+          "breakpoint": 768,
+          "sectionClass": "CanvasSection",
+          "webPartClass": "ControlZone"
+        }
+      }
+    }
+  ]
+}

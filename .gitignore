@@ -3,3 +3,11 @@ node_modules/
 .env
 .env.*
 *.log
+# Generated SPFx intermediates (source remains under src/)
+**/lib-commonjs/
+**/lib-dts/
+**/lib-esm/
+**/.heft/
+**/preview/dist/
+**/preview/bundle.js
+**/preview/bundle.css

@@ -1,0 +1,42 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {BaseApplicationCustomizer,PlaceholderName,PlaceholderContent} from '@microsoft/sp-application-base';
+import {SPPermission} from '@microsoft/sp-page-context';
+import {spfi,SPFx} from '@pnp/sp';
+import '@pnp/sp/webs';import '@pnp/sp/lists';import '@pnp/sp/items';import '@pnp/sp/fields';
+import {CompanyHeader} from './CompanyHeader';
+import {groupLinks,LinkRow,MenuGroup,Quote,PricePoint} from './model';
+import {loadStock} from '../../modules/stock/stockService';
+import {StockConfig,demoConfig,validateConfig} from '../../modules/stock/config';
+import {SuiteNavigationAdapter} from '../../modules/suiteNavigation/SuiteNavigationAdapter';
+import './header.css';
+interface Properties{listTitle?:string;disableSuiteIntegration?:boolean;}
+import {settingsList,saveOwnerSettings} from '../../modules/settingsStore';
+import {NavigationConfig,defaultNavigation,testNavigation,validateNavigation} from '../../modules/suiteNavigation/config';
+import {CascadingMenu} from '../../modules/cascadingMenu/CascadingMenu';
+import {MenuItem,validateMenu} from '../../modules/cascadingMenu/model';
+export default class CompanyHeaderApplicationCustomizer extends BaseApplicationCustomizer<Properties>{
+ private menu:MenuItem[]=[];private menuPlaceholder?:PlaceholderContent;private navigation:NavigationConfig={...defaultNavigation};private adapter=new SuiteNavigationAdapter();private host?:HTMLElement;private disposed=false;private revision=0;private groups:MenuGroup[]=[];private linksError?:string;private quote?:Quote;private history:PricePoint[]=[];private stockError?:string;private loading=true;private config:StockConfig={...demoConfig};
+ private sp(){return spfi().using(SPFx(this.context));}
+ protected async onInit():Promise<void>{if(this.properties.disableSuiteIntegration)return;this.readNavigationCache();this.startAdapter();await super.onInit();this.context.application.navigatedEvent.add(this,this.reloadLinks);const initial=JSON.stringify(this.navigation);await this.loadNavigation();if(this.disposed)return;this.writeNavigationCache();if(initial!==JSON.stringify(this.navigation)){this.adapter.dispose(host=>ReactDOM.unmountComponentAtNode(host));this.host=undefined;this.startAdapter();}if(this.isOwner())void saveOwnerSettings(this.sp(),'NavigationConfig',this.navigation).catch(()=>{ /* Retry permission migration on a later owner save. */ });this.context.placeholderProvider.changedEvent.add(this,this.renderMenu);await this.loadMenu();this.renderMenu();void this.reloadLinks();void this.initializeStock();}
+ // Cache public selectors per web; SharePoint remains authoritative.
+ private navigationCacheKey():string{return 'DevStories:NavigationConfig:'+this.context.pageContext.web.absoluteUrl.toLowerCase();}
+ private readNavigationCache():void{try{const saved=window.localStorage.getItem(this.navigationCacheKey());if(saved)this.navigation=validateNavigation(JSON.parse(saved));}catch{this.navigation={...defaultNavigation};}}
+ private writeNavigationCache():void{try{window.localStorage.setItem(this.navigationCacheKey(),JSON.stringify(this.navigation));}catch{ /* Storage may be disabled; immediate defaults still apply. */ }}
+ private loadMenu=async():Promise<void>=>{try{const rows=await this.sp().web.lists.getByTitle(settingsList).items.filter("Title eq 'MenuConfig'").select('Configuration').top(1)();if(rows.length)this.menu=validateMenu(JSON.parse(rows[0].Configuration));}catch{this.menu=[];}};
+ private saveMenu=async(items:MenuItem[]):Promise<void>=>{if(!this.isOwner())throw new Error('Only site owners can edit navigation links.');const value=validateMenu(items);await saveOwnerSettings(this.sp(),'MenuConfig',value);this.menu=value;this.renderMenu();};
+ private renderMenu=():void=>{if(this.disposed)return;if(!this.menuPlaceholder)this.menuPlaceholder=this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top,{onDispose:()=>{if(this.menuPlaceholder?.domElement)ReactDOM.unmountComponentAtNode(this.menuPlaceholder.domElement);this.menuPlaceholder=undefined;}});if(this.menuPlaceholder?.domElement)ReactDOM.render(<CascadingMenu items={this.menu} onSave={this.isOwner()?this.saveMenu:undefined}/>,this.menuPlaceholder.domElement);};
+ private isOwner():boolean{return this.context.pageContext.web.permissions.hasPermission(SPPermission.manageWeb)&&this.context.pageContext.web.permissions.hasPermission(SPPermission.managePermissions);}
+ private startAdapter():void{this.adapter.start(host=>{this.host=host;this.renderHeader();},host=>ReactDOM.unmountComponentAtNode(host),this.navigation);}
+ private loadNavigation=async():Promise<void>=>{try{const sp=this.sp();const lists=await sp.web.lists.filter("Title eq '"+settingsList+"'").select('Id')();if(lists.length){const rows=await sp.web.lists.getByTitle(settingsList).items.filter("Title eq 'NavigationConfig'").select('Configuration').top(1)();if(rows.length)this.navigation=validateNavigation(JSON.parse(rows[0].Configuration));}}catch{this.navigation={...defaultNavigation};}};
+ private saveNavigation=async(input:NavigationConfig):Promise<void>=>{if(!this.isOwner())throw new Error('Only site owners can change navigation settings.');const value=validateNavigation(input);testNavigation(value);await saveOwnerSettings(this.sp(),'NavigationConfig',value);this.navigation=value;this.writeNavigationCache();window.setTimeout(()=>{if(this.disposed)return;this.adapter.dispose(host=>ReactDOM.unmountComponentAtNode(host));this.host=undefined;this.startAdapter();},0);};
+ private initializeStock=async():Promise<void>=>{try{const sp=this.sp();const lists=await sp.web.lists.filter("Title eq '"+settingsList+"'").select('Id')();if(lists.length){const rows=await sp.web.lists.getByTitle(settingsList).items.filter("Title eq 'StockConfig'").select('Configuration').top(1)();if(rows.length)this.config=validateConfig(JSON.parse(rows[0].Configuration));}const data=await loadStock(this.config);if(this.disposed)return;this.quote=data.quote;this.history=data.history;}catch{this.stockError='Stock unavailable';}if(!this.disposed)this.renderHeader();};
+ private saveStock=async(input:StockConfig):Promise<void>=>{
+  if(!this.isOwner())throw new Error('Only site owners can change stock settings.');
+  const config=validateConfig(input);const data=await loadStock(config);await saveOwnerSettings(this.sp(),'StockConfig',config);
+  if(this.disposed)return;this.config=config;this.quote=data.quote;this.history=data.history;this.stockError=undefined;this.renderHeader();
+ };
+ private reloadLinks=async():Promise<void>=>{const revision=++this.revision;this.loading=true;this.linksError=undefined;this.renderHeader();try{const rows:LinkRow[]=[];for await(const page of this.sp().web.lists.getByTitle(this.properties.listTitle||'UserProfileLinks').items.select('Id','Title','Url','GroupByText').orderBy('Id').top(200)){rows.push(...page as LinkRow[]);}if(this.disposed||revision!==this.revision)return;this.groups=groupLinks(rows,this.context.pageContext.web.absoluteUrl);}catch{if(this.disposed||revision!==this.revision)return;this.groups=[];this.linksError='Profile links could not be loaded. Check access to the UserProfileLinks list.';}this.loading=false;this.renderHeader();};
+ private renderHeader=():void=>{if(this.disposed||!this.host)return;const user=this.context.pageContext.user;const photo=this.context.pageContext.web.absoluteUrl+'/_layouts/15/userphoto.aspx?size=S&accountname='+encodeURIComponent(user.email||user.loginName);ReactDOM.render(<CompanyHeader compact navigation={this.navigation} onSaveNavigation={this.isOwner()?this.saveNavigation:undefined} config={this.config} onSaveStock={this.isOwner()?this.saveStock:undefined} logo="" homeUrl={this.context.pageContext.web.absoluteUrl} name={user.displayName||'My account'} photoUrl={photo} groups={this.groups} linksError={this.linksError} quote={this.quote} history={this.history} stockError={this.stockError} loading={this.loading}/>,this.host);};
+ protected onDispose():void{this.context.placeholderProvider.changedEvent.remove(this,this.renderMenu);if(this.menuPlaceholder?.domElement)ReactDOM.unmountComponentAtNode(this.menuPlaceholder.domElement);this.menuPlaceholder?.dispose();this.disposed=true;this.revision++;this.context.application.navigatedEvent.remove(this,this.reloadLinks);this.adapter.dispose(host=>ReactDOM.unmountComponentAtNode(host));this.host=undefined;}
+}

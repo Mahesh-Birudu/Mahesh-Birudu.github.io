@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "bundles": {
+    "m365-search-verticals-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/searchVerticals/SearchVerticalsWebPart.js",
+          "manifest": "./src/webparts/searchVerticals/SearchVerticalsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {}
+}

@@ -1,0 +1,1 @@
+{"version":"2.0","bundles":{"m365-column-splitter-web-part":{"components":[{"entrypoint":"./lib/webparts/columnSplitter/ColumnSplitterWebPart.js","manifest":"./src/webparts/columnSplitter/ColumnSplitterWebPart.manifest.json"}]}},"externals":{},"localizedResources":{}}

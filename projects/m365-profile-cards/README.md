@@ -1,11 +1,11 @@
 # Microsoft 365 Profile Cards — React + PnPjs
 
-Version 1.3.1. A registered PnP Modern Search custom element mounts React components. Microsoft Graph requests use PnPjs with the signed-in SPFx service scope; no tenant URL, credentials or app secret is embedded.
+Version 1.5.1. A registered PnP Modern Search custom element mounts React components. Microsoft Graph requests use PnPjs with the signed-in SPFx service scope; no tenant URL, credentials or app secret is embedded.
 
 ```text
 src/
   components/
-    ProfileCard.tsx             Card composition, loading/retry and popup state
+    ProfileCard.tsx             Card composition, loading/retry and slide-out state
     ProfileDetailsDialog.tsx    Accessible native dialog rendered by React
     PresenceBadge.tsx           Teams status presentation
     ProfilePhoto.tsx            Photo and initials fallback
@@ -48,9 +48,9 @@ npm run build
 npm run package
 ```
 
-Package: `sharepoint/solution/m365-profile-cards.sppkg` (solution version 1.3.1.0). See [setup](docs/SETUP.md), [presence](docs/TEAMS-PRESENCE.md), [architecture](docs/ARCHITECTURE.md) and [validation](VALIDATION.md).
+Package: `sharepoint/solution/m365-profile-cards.sppkg` (solution version 1.5.1.0). See [setup](docs/SETUP.md), [presence](docs/TEAMS-PRESENCE.md), [architecture](docs/ARCHITECTURE.md) and [validation](VALIDATION.md).
 
-The public browser demo uses these same React components with `MockProfileProvider`; it never authenticates against Microsoft 365. Its profiles and Teams states are synthetic. The video records the previous visual version; use the interactive React demo to review 1.3.1.
+The public browser demo uses these same React components with `MockProfileProvider`; it never authenticates against Microsoft 365. Its profiles and Teams states are synthetic. The video records the previous visual version; use the interactive React demo to review 1.5.1.
 
 ## Upgrade
 
@@ -58,7 +58,7 @@ Replace the package in the app catalog, update the installed site app if request
 
 ## Downloads and demo
 
-- [SPFx package 1.3.1.0](../../portfolio/projects/m365-profile-cards/downloads/m365-profile-cards.sppkg)
+- [SPFx package 1.5.1.0](../../portfolio/projects/m365-profile-cards/downloads/m365-profile-cards.sppkg)
 - [Buildable source snapshot](../../portfolio/projects/m365-profile-cards/downloads/source.zip)
 - [Captioned visual walkthrough — 1.1.0](../../portfolio/projects/m365-profile-cards/media/demo.mp4)
 - Compiled demo is in [the portfolio showcase](../../portfolio/projects/m365-profile-cards/); editable React preview source is in [preview](preview/); run the preview commands above for the interactive version.
@@ -80,6 +80,11 @@ npm run build
 npm run package
 ```
 
-Upgrade the installed PnP Modern Search package to 4.25.0 before deploying this 1.3.1 library into a tenant previously using 4.16.0. GUIDs and Graph scopes remain unchanged. This repository publication does not deploy into SharePoint.
+Upgrade the installed PnP Modern Search package to 4.25.0 before deploying this 1.5.1 library into a tenant previously using 4.16.0. GUIDs and Graph scopes remain unchanged. This repository publication does not deploy into SharePoint.
 
 Sources: [Microsoft SPFx compatibility](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/compatibility), [Heft migration](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/toolchain/migrate-gulptoolchain-hefttoolchain-manual), [PnP compatibility](https://microsoft-search.github.io/pnp-modern-search/extensibility/extensibility_compatibility_matrix/).
+
+### Directory layout (1.5.0)
+The results use responsive, photo-led cards. Selecting a photo or name opens a native accessible dialog styled as a full-height right-side panel. Escape, the close button, and the backdrop dismiss it; focus returns to the originating card. Profile data, photos and Teams presence still come from the existing Graph/PnP provider. Missing photos use initials.
+
+The decorative SVG banner is bundled locally and uses #cb202d, #2d2d2d and #f4f4f2. Detail rows use Fluent UI icons. All layout selectors belong to this component; no SharePoint canvas selectors are changed. The Handlebars template continues to render `<m365-profile-details>` directly.

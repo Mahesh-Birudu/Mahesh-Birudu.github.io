@@ -5,3 +5,5 @@
 *.zip binary
 *.sppkg binary
 portfolio/projects/m365-profile-cards/demo.js linguist-generated=true
+
+portfolio/projects/**/demo.js -whitespace

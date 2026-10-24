@@ -1,0 +1,1 @@
+{"version":"2.0","bundles":{"dev-stories-carousel-web-part":{"components":[{"entrypoint":"./lib/webparts/carousel/CarouselWebPart.js","manifest":"./src/webparts/carousel/CarouselWebPart.manifest.json"}]}},"externals":{},"localizedResources":{}}

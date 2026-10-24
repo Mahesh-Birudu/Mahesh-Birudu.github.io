@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "name": "m365-search-verticals-client-side-solution",
+    "id": "e0601419-0d36-419b-ab91-64a218e6aa36",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/m365-search-verticals.sppkg"
+  }
+}

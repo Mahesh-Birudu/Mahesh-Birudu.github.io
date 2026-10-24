@@ -1,0 +1,7 @@
+import * as React from 'react';
+import {Icon} from '@fluentui/react/lib/Icon';
+import {MenuGroup} from '../../extensions/companyHeader/model';
+export const ProfileCallout:React.FC<{name:string;groups:MenuGroup[];loading:boolean;error?:string;onConfigure?:()=>void}>=({name,groups,loading,error,onConfigure})=>{
+ const [expanded,setExpanded]=React.useState<Record<string,boolean>>({});
+ return <nav id="ds-profile-menu" className="ds-profile-menu" aria-label="Dev Stories profile links"><div className="ds-profile-identity">{onConfigure&&<button className="ds-navigation-config-trigger" type="button" aria-label="Configure navigation" title="Configure navigation (site owners only)" onClick={onConfigure}><Icon iconName="Settings"/></button>}<strong>{name}</strong><span>Dev Stories</span></div>{loading?<p role="status">Loading links…</p>:error?<p role="status">{error}</p>:groups.length?groups.map((group,index)=>group.label?<div className="ds-menu-group" key={group.label}><button type="button" aria-expanded={Boolean(expanded[group.label])} onClick={()=>setExpanded(v=>({...v,[group.label]:!v[group.label]}))}>{group.label}<Icon iconName={expanded[group.label]?'ChevronUp':'ChevronDown'} aria-hidden="true"/></button>{expanded[group.label]&&<div>{group.links.map(link=><a key={link.id} href={link.url}>{link.title}</a>)}</div>}</div>:<div key={index}>{group.links.map(link=><a key={link.id} href={link.url}>{link.title}<Icon iconName="ChevronRight" aria-hidden="true"/></a>)}</div>):<p>No profile links are configured.</p>}</nav>;
+};

@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "bundles": {
+    "m365-company-header-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/companyHeader/CompanyHeaderApplicationCustomizer.js",
+          "manifest": "./src/extensions/companyHeader/CompanyHeaderApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {}
+}

@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "name": "m365-column-splitter-client-side-solution",
+    "id": "9cc73b15-92ab-4e47-8cb5-d7e1caf015e5",
+    "version": "2.0.1.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/m365-column-splitter.sppkg"
+  }
+}
