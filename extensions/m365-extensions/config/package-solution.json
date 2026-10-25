@@ -2,7 +2,7 @@
   "solution": {
     "name": "m365-company-header-client-side-solution",
     "id": "b823ce09-3f1a-48c4-b960-3b6d63536de9",
-    "version": "1.4.2.0",
+    "version": "1.5.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": false,
     "isDomainIsolated": false,

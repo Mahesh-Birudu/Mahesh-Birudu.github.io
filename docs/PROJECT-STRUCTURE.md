@@ -28,4 +28,4 @@ The public portfolio routes under /projects/ are intentionally unchanged. Packag
 
 Choose the category above, create one project folder under it, and follow the root AGENTS.md rules. Keep libraries/, extensions/ and webparts/ at the repository root. Consumers in another category reference shared brand with file:../../libraries/m365-search-brand; sibling libraries use file:../m365-search-brand. Update package-lock.json as well as package.json.
 
-Add each deployable project to .github/workflows/spfx.yml, update the root source map and setup guide, and validate its scripts. New public demos belong under portfolio/projects/ and must use fictional data.
+Add each deployable project to .github/workflows/spfx.yml, update the root source map and setup guide, and validate its scripts. New public demos belong under 00-portfolio/projects/ and must use fictional data.

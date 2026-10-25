@@ -31,7 +31,7 @@ Expected response (illustration only):
 All company labels, prices, currency formatting, and chart values use the configured feed. IBM is reference demo data, not the customer's company stock. Data is loaded on page initialization or saving settings; it is not streamed. The IBM demo requests use a fifteen-minute in-memory cache.
 
 ## Build and deploy
-npm ci; npm run build; npm run package. Deploy sharepoint/solution/m365-company-header.sppkg to the catalog and upgrade the app on Metrics. Version 1.4.2.0 retains the existing solution/component IDs. It is not tenant-wide activation. npm test runs validation and adapter lifecycle tests. Preview: npm run preview:build; npm run preview (port 4187).
+npm ci; npm run build; npm run package. Deploy sharepoint/solution/m365-company-header.sppkg to the catalog and upgrade the app on Metrics. Version 1.5.0.0 retains the existing solution/component IDs. It is not tenant-wide activation. npm test runs validation and adapter lifecycle tests. Preview: npm run preview:build; npm run preview (port 4187).
 
 
 ## Owner navigation settings
@@ -57,3 +57,6 @@ The adapter starts synchronously when the Application Customizer initializes, be
 
 ## Flush page frame — version 1.4.2.0
 The Microsoft .sp-pageLayout-horizontalNav frame inside #spPageChromeAppDiv has zero outer margin, border and corner radius, and no shadow. This removes the top/right gutter below the suite bar while retaining the intranet menu's internal padding and authoring commands. The rule lives in the adapter's disposable style and is removed when the extension is disabled/disposed.
+
+## Wide mega menu — version 1.5.0.0
+The four main categories open a full-width panel with a featured image and grouped link columns. In Edit, root items configure the image URL, accessible image description and introduction. Immediate children form column headings; deeper groups expand in their column, retaining the existing four-level structure. Existing MenuConfig entries remain compatible. Escape closes the panel and restores focus; arrow keys move between category buttons.

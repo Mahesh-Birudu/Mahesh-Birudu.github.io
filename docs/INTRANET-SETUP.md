@@ -6,7 +6,7 @@ This guide describes the source published with the portfolio, not a tenant provi
 
 | Component | Folder | Package version | Purpose |
 | --- | --- | --- | --- |
-| Company header, profile menu, stock, cascading navigation | extensions/m365-extensions | 1.4.2.0 | Application Customizer with modules and owner settings |
+| Company header, profile menu, stock, cascading navigation | extensions/m365-extensions | 1.5.0.0 | Application Customizer with modules and owner settings |
 | Home carousel | webparts/carousel | 1.0.1.0 | Static page properties, inline editor, image frame and quick links |
 | People profile cards | libraries/m365-profile-cards | 1.5.1.0 | PnP extensibility library, Graph profiles/photos/presence, right slide-out |
 | Search filters | libraries/m365-search-filters | 1.0.6.0 | Searchable popup options, Apply/Clear and selected chips |
@@ -101,7 +101,7 @@ Create a list named UserProfileLinks on the same site. Use the exact internal fi
 
 Blank GroupByText values render direct links. Repeated nonblank groups render one expandable group containing their links, in item ID order. Populate examples such as Profile, People directory and three Get help links. Give intended readers Read access to the list. Broken/unsafe URLs are omitted.
 
-Company logo and Microsoft suite theme are organization settings, separate from the custom menu. The extension appends INTRANET beside the company logo and mounts the custom stock/profile controls in the isolated adapter. Menu links under the suite bar are configured through the right-side Edit button. Fresh installs start empty; owners may load sample links, then replace URLs before saving. Up to four levels and 150 links are supported.
+Company logo and Microsoft suite theme are organization settings, separate from the custom menu. The extension appends INTRANET beside the company logo and mounts the custom stock/profile controls in the isolated adapter. Menu links under the suite bar are configured through the right-side Edit button. Fresh installs start empty; owners may load sample links, then replace URLs before saving. Up to four levels and 150 links are supported. In the wide mega menu, main items become tabs and their immediate children become column headings. Deeper groups expand within a column. Owners can set a featured image URL, image description and menu introduction on each main item. Existing saved menus remain valid.
 
 ## 9. Owner settings and Microsoft selector recovery
 
@@ -182,4 +182,4 @@ In Manage columns select actual web-part instances and enter container name, wid
 - [PnP Modern Search documentation](https://microsoft-search.github.io/pnp-modern-search/)
 - [PnP custom filter controls](https://microsoft-search.github.io/pnp-modern-search/extensibility/custom_filter_control/)
 
-Source inspection and project behavior were reviewed on 2026-10-24. Administrative interfaces and provider availability can change; verify permissions and compatibility before adopting a different version.
+Source inspection and project behavior were reviewed on 2026-10-25. Administrative interfaces and provider availability can change; verify permissions and compatibility before adopting a different version.

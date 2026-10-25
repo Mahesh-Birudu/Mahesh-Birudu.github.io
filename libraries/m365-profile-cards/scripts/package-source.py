@@ -3,7 +3,7 @@ import pathlib
 import zipfile
 project = pathlib.Path(__file__).resolve().parent.parent
 root = project.parent.parent
-destination = root / 'portfolio/projects/m365-profile-cards/downloads/source.zip'
+destination = root / '00-portfolio/projects/m365-profile-cards/downloads/source.zip'
 excluded_dirs = {'node_modules', 'dist', '.git', '.heft', '__pycache__', 'lib', 'lib-commonjs', 'lib-dts', 'lib-esm', 'temp'}
 allowed_dirs = {'config', 'docs', 'preview', 'scripts', 'src', 'templates', 'tests'}
 allowed_files = {'.gitignore', '.npmrc', '.nvmrc', 'CHANGELOG.md', 'README.md', 'SECURITY.md', 'VALIDATION.md', 'package.json', 'package-lock.json', 'tsconfig.json', 'eslint.config.mjs'}
